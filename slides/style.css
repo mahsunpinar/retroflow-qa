@@ -1,0 +1,114 @@
+/* Test Engineer Day theory deck: colours and typography */
+:root {
+  --navy: #14213d;
+  --paper: #f7f5f0;
+  --card: #fffdf9;
+  --line: #ded9ce;
+  --mist: #eef1f4;
+  --orange: #b5530f;
+  --orange-light: #f2a65a;
+  --blue: #2f5d9e;
+  --body: #3d4a5c;
+  --muted: #6b7480;
+}
+
+.slidev-layout {
+  background: var(--paper);
+  color: var(--navy);
+  font-family: 'Public Sans', Arial, sans-serif;
+  padding: 3rem 3.5rem;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  font-family: 'Rubik', Arial, sans-serif;
+  font-weight: 600;
+  color: inherit;
+  line-height: 1.15;
+}
+
+.slidev-layout h1 { font-size: 2.6rem; margin-bottom: 1.2rem; }
+.slidev-layout h3 { font-size: 1.35rem; margin-bottom: 0.4rem; }
+.slidev-layout p, .slidev-layout li { color: var(--body); font-size: 1.05rem; line-height: 1.5; }
+
+/* small orange label above a title */
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.4rem;
+}
+
+/* footer line at the bottom of a slide */
+.footer {
+  position: absolute;
+  left: 3.5rem;
+  right: 3.5rem;
+  bottom: 1.6rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+}
+.card.accent { border: 2px solid var(--blue); }
+.card.grey { background: var(--mist); border-color: var(--mist); }
+.card .label { font-size: 0.75rem; font-weight: 600; color: var(--blue); margin-bottom: 0.3rem; }
+.card.grey .label { color: #6b4a00; }
+.card p { margin: 0.2rem 0; }
+
+.big-number { font-family: 'Rubik', Arial, sans-serif; font-size: 2.4rem; font-weight: 600; color: var(--blue); line-height: 1; }
+
+.code-box {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #e6ebf2;
+}
+.code-box .file { color: var(--orange-light); font-weight: 600; margin-bottom: 0.4rem; }
+
+.arrow { font-size: 2rem; color: var(--orange); align-self: center; }
+
+/* tables */
+.slidev-layout table { width: 100%; font-size: 1rem; }
+.slidev-layout th { text-align: left; color: var(--navy); font-weight: 600; }
+.slidev-layout tr:nth-child(even) td { background: var(--mist); }
+.slidev-layout td, .slidev-layout th { padding: 0.45rem 0.7rem; border-bottom: 1px solid var(--line); }
+
+/* dark title slides (layout: cover / section) */
+.slidev-layout.cover,
+.slidev-layout.section {
+  background: var(--navy);
+  color: var(--paper);
+}
+.slidev-layout.cover p,
+.slidev-layout.section p { color: #c9d3e0; }
+.slidev-layout.cover .eyebrow,
+.slidev-layout.section .eyebrow { color: var(--orange-light); }
+.slidev-layout.cover h1,
+.slidev-layout.section h1 { font-size: 3.4rem; font-weight: 600; }
+
+/* orange statement slides (class: statement) */
+.slidev-layout.statement {
+  background: var(--orange);
+  color: #fff8f0;
+}
+.slidev-layout.statement p,
+.slidev-layout.statement .eyebrow { color: #ffe4cc; }
+.slidev-layout.statement h1 { font-size: 3.2rem; }
+
+/* dark content slide (class: dark) */
+.slidev-layout.dark { background: var(--navy); color: var(--paper); }
+.slidev-layout.dark p, .slidev-layout.dark li { color: #e6ebf2; }
+.slidev-layout.dark .eyebrow { color: var(--orange-light); }
+.slidev-layout.dark .footer { color: #c9d3e0; }
