@@ -14,13 +14,14 @@ the same for everyone, so there's no wrong group to be in right now.
 After each prompt: read the output critically before using it. If something feels off, it
 probably is.
 
-**No Java or Maven installed, and not planning to write code today?** You still need the
-application running so you have something to test. Open the RetroFlow QA reference repo in a
-free **GitHub Codespace** (Code → Codespaces → Create codespace, on the repo's GitHub page). It
-starts the application for you with one pre-set command, no local install, nothing to
-understand about the code. Point Postman at the Codespace's forwarded port instead of
-`localhost`, ask your coach if you're not sure which URL to use, and work exactly as described
-below from there.
+**The application is already running for you.** Your coach gives your group a URL. That is
+RetroFlow, and everything today happens against it, with Postman (or a browser) and your AI
+chat. There is nothing to install or start. Wherever a prompt below says `localhost:8080`, use
+your group's URL instead. The endpoints are listed in `retroflow-api-reference.md`.
+
+> Your group shares one instance of the app, so you will see each other's data in lists.
+> Give every team you create a name that contains your own initials, and you'll always know
+> which data is yours.
 
 ---
 
@@ -215,8 +216,7 @@ You do not need to read Java to do this. Let AI translate it for you, then you m
 ```
 Here is an existing automated test suite for a Spring Boot project:
 
-[paste the existing test file(s) from the repo, or ask a teammate on the automation side of
-the room to share theirs]
+[paste the contents of RetroflowApiTest.java, the test suite the developers left behind]
 
 For each test, explain in plain English, no code, what it actually checks, and rate whether
 that check would catch a real regression or would pass no matter what the API returned. Flag

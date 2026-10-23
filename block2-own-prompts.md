@@ -1,7 +1,7 @@
 # Block 2: Writing the prompts yourself
 New pairs! You're now working with someone you haven't paired with yet today.
 
-Your coach will tell you which track your pair is on: **Automation** (writing and running executable tests) or **Manual & Exploratory** (testing by hand, no code). If your group has two pairs on the same track, one pair takes Role 1 and the other takes Role 2.
+Your coach will tell you which track your pair is on: **Automation** (an agent writes and runs executable tests for you) or **Manual & Exploratory** (testing by hand, no code). If your group has two pairs on the same track, one pair takes Role 1 and the other takes Role 2.
 
 Before you write a single prompt, take 5 minutes to read what your teammates made in Block 1: `test-plan.md`, the test case catalogue, `session-notes.md` and `bugs.md`. We're building on top of that, so don't start from scratch. It will probably also show you a few things you missed this morning.
 
@@ -17,15 +17,35 @@ Before you write a single prompt, take 5 minutes to read what your teammates mad
 
 # Automation track
 
+In this track, both roles work with an **agent**. This is an AI course, so the agent writes and runs the tests and you steer it. Role 1 builds the business rule tests and diagnoses what fails. Role 2 attacks the API with negative, boundary and adversarial tests.
+
+An agent is an AI that reads and edits several files by itself and can run commands. In Copilot you switch the chat from **Ask** to **Agent**. It makes a plan, and then works through it step by step. That changes your job quite a bit: you're no longer writing prompts that produce code, you're giving instructions, reviewing a plan and checking what it changed.
+
+> **Where do you work?** An agent needs a folder with your test project in an editor that has an agent, like VS Code with GitHub Copilot in **Agent** mode. Your tests call your group's URL, so you don't need Java or the code of the app. Put the folder in a git repository (`git init`), because that is what makes the Source Control panel work.
+
+> No editor with an agent on your laptop? Ask your coach for the link to the **RetroFlow tests starter**. Open it as a free **GitHub Codespace** (Code → Codespaces → Create codespace on main). It comes with Node.js and Playwright's API testing ready, and its README tells you the rest. Enable **GitHub Copilot Free** (no credit card) for agent mode. It's capped at 50 requests a month, which is enough for one block as long as you watch your tokens. Skip setup chatter in your prompts: the agent can run `npm test` itself.
+
+> Your own editor works too, and then you choose the tool: Playwright, Cypress or Postman/Newman. Tell the agent which one in your first prompt. No idea? Playwright works for everyone, and the starter has it ready.
+
+> There's one rule for this block: you don't edit any test by hand. The only exceptions are `prompt-log.md`, `bugs.md`, `decisions.md` and the `.env` file with your group's URL. The `.env` file is setup, not a test, so you make that one yourself. If the agent produces a weak test, you fix it by giving it another instruction. It will feel slower at times, but this is exactly how you find out where agents go wrong.
+
+> Two pairs of your group share one app. Put your own initials in the names of the teams you create, so you don't trip over each other's data.
+
+Open the **Source Control** panel on the left (or run `git diff` in a terminal). Every file the agent touched is listed there, and if you click one, you see exactly what changed. You'll use this all block long. It's how you check what an agent really did.
+
+**The habit of this block:** never let an agent start changing files before you've seen its plan. Every step below starts with "plan first".
+
+---
+
 ## Role 1: executable business rule tests and bug diagnosis
 
-Your job: turn the core business rules into automated tests that run against the live API, and work out for every failure whether the app is wrong, or your test is.
+Your job: let the agent turn the core business rules into automated tests that run against the live API, and work out for every failure whether the app is wrong, or the test is.
 
-Before you start, run the app once so you know what the current state is. Don't write any code yet.
+Before you start, send one request to the app yourself so you know what the current state is. Don't write any code yet.
 
-### Step 1: write the tests
+### Step 1: plan, then write the tests
 
-**Goal:** executable tests for the four core business rules, running against the live API (`http://localhost:8080`, or the URL of your Codespace). Not unit tests on internal methods, real HTTP calls.
+**Goal:** executable tests for the four core business rules, running against the live API, which is your group's URL. Not unit tests on internal methods, real HTTP calls. First a plan, then the tests.
 
 The four rules:
 1. A team can only have one OPEN retrospective at a time
@@ -34,15 +54,17 @@ The four rules:
 4. A completed action item cannot be uncompleted
 
 A good prompt for this:
-* Tells the AI what the application is and where it runs
+* Tells the agent what the application is and where it runs
 * Lists the four rules, in the words of the brief
 * Gives it your endpoint list from Block 1, so it doesn't have to guess the paths
 * Says in so many words that the tests have to call the running API over HTTP
 * Wants the status code AND the body checked
-* Names the tool: RestAssured, or Postman/Newman. Your choice
+* Says that nothing may be written yet: you want a plan first
+* Names the tool you want to use, if you work in your own editor
 
 Then check it:
-* Run every test against the live application, right now.
+* Read the plan. One test per rule, or more? Does it cover the failure case of every rule, or only the happy path? Tell the agent what to change before you let it continue.
+* Then tell it to write the tests and run them against the live application.
 * Go rule by rule. Does each test pass? If one fails, do NOT assume your test is wrong. Deciding that is exactly what this block is about.
 * Look at rule 3. "Added to, modified in or deleted from" is three operations. Do you have three separate tests?
 
@@ -53,14 +75,16 @@ Some of your tests from step 1 will fail. Take them one at a time.
 **Goal:** for every failing test, a verdict: a bug in the application, a bug in your test, or a rule that isn't clear enough and needs someone to decide.
 
 A good prompt for this:
-* Gives the AI the test code, the actual response (status code and body) and the business rule from the brief
+* Points the agent to the failing test, and asks it to show the actual response (status code and body) next to the business rule from the brief
 * Asks for one of those three verdicts, and the reasoning behind it
 * Tells it to reason from the response only, and not to guess at code it can't see
+* Says it may not change the test or anything else yet. Only a verdict
 
 Then check it:
 * Don't accept the verdict before you've read the response body yourself.
+* An agent likes a green suite. Watch for the moment it "fixes" a test by loosening the assertion. That hides a bug.
 * Every genuine bug goes in `bugs.md`, with severity, exact reproduction steps (the request and the response) and business impact. "Test failed" is not a bug report.
-* Every test that was wrong: fix it, and write a line in `decisions.md` about what you learned about reading the API contract.
+* Every test that was wrong: tell the agent to fix it, and write a line in `decisions.md` about what you learned about reading the API contract.
 
 ### Step 3: edge cases and concurrency
 
@@ -75,10 +99,11 @@ A good prompt for this:
 * For the race condition: says the requests really have to go out at the same time. A loop that sends one after the other proves nothing
 * Asks what result would prove the rule holds, and what result would prove it doesn't
 * For the error response: says what you count as a leak
+* Asks for a plan first, and for the agent to stop after each case
 
 Then check it:
 * Run all four and read the actual responses. This is where several real bugs live.
-* The race condition is the hardest one. If your first attempt doesn't actually race the requests, ask the AI to fix the test itself, not just the assertion.
+* The race condition is the hardest one. Open the test in the Source Control panel and check that the requests are really sent at the same moment. If they aren't, tell the agent to fix the test itself, not just the assertion.
 * Log everything you find in `bugs.md`. A real bug is a real bug, whether it was put there on purpose or not.
 
 ### Step 4: one operation at a time
@@ -88,31 +113,26 @@ Then check it:
 A good prompt for this:
 * Names the three operations, one test each
 * Says what a correct response looks like (the request has to be rejected)
-* Tells the AI to run them against the live API and report per test: pass or fail
+* Tells the agent to run them against the live API and report per test: pass or fail
 
 Then check it:
 * This is the most likely place to find a real gap. Read the results carefully, and don't assume the three behave the same just because they're related.
 * Log every gap with full reproduction steps.
+* Open the diff once more. Did the agent change something you didn't ask for?
 
 ---
 
 ## Role 2: let an agent expand the test suite
 
-Your job: use an AI agent to add negative, boundary and adversarial tests across the whole API, in one coordinated operation. You're not allowed to write test cases by hand. Everything goes through the agent.
+Your job: use the agent to add negative, boundary and adversarial tests across the whole API, in one coordinated operation. Everything goes through the agent, you don't write test cases by hand.
 
-An agent is an AI that reads and edits several files by itself. In Copilot you switch the chat from **Ask** to **Agent**. It makes a plan, and then works through it step by step. That changes your job quite a bit: you're no longer writing prompts that produce code, you're giving instructions, reviewing a plan and checking what it changed.
-
-> **No IDE installed at all?** Not everyone on this day writes automated tests every day, so this is expected. Open the RetroFlow QA reference repo in a free **GitHub Codespace** (Code → Codespaces → Create codespace, on the repo's GitHub page). It's a full VS Code in your browser, with Java 21 and Maven ready. Enable **GitHub Copilot Free** (no credit card) for agent mode. It's capped at 50 requests a month, which is enough for one block as long as you watch your tokens.
-
-> There's one rule for this block: you don't edit any test by hand. The only exceptions are `prompt-log.md`, `bugs.md` and `decisions.md`. If the agent produces a weak test, you fix it by giving it another instruction. It will feel slower at times, but this is exactly how you find out where agents go wrong.
-
-Open the **Source Control** panel on the left (or run `git diff` in a terminal). Every file the agent touched is listed there, and if you click one, you see exactly what changed. You'll use this all block long. It's how you check what an agent really did.
+> Start from the tests the Role 1 pair built. Your group has no Role 1 pair? Then your first prompt asks the agent to create a small baseline suite for the four core rules (your Block 1 test case catalogue is good input), in the tool you know.
 
 The test suite so far has the gaps that are common in AI-assisted testing:
 1. **Shallow assertions.** Tests that only check the status code and not what's in the body
 2. **No boundary tests.** Nothing with empty strings, very long strings, null versus a missing field, or edge values of an enum
 3. **No adversarial input.** Nothing with malformed JSON, a wrong content type or unexpected extra fields
-4. **No cross-entity checks.** Nothing that verifies what happens to the retrospectives of a deleted team, or that feedback items really belong to the right retrospective
+4. **No cross-entity checks.** Nothing that verifies that a retrospective really belongs to the team in the path (try another team's ID), or that feedback items belong to the right retrospective
 5. **Tests that depend on each other.** Some tests may only pass in a certain order, or share state
 
 ### Step 1: plan before you act
@@ -246,7 +266,7 @@ The agent in the other track generates tests. You're going to generate the same 
 1. **Shallow checks.** Only glancing at the status code, not at what's in the body
 2. **No boundary tests.** Nothing tried with empty strings, very long strings, missing fields or edge values like priority
 3. **No adversarial input.** Nothing tried with malformed JSON, a wrong content type or unexpected extra fields
-4. **No cross-entity checks.** Nothing that verifies what happens to the retrospectives of a deleted team, or that feedback items really belong to the right retrospective
+4. **No cross-entity checks.** Nothing that verifies that a retrospective really belongs to the team in the path (try another team's ID), or that feedback items belong to the right retrospective
 5. **No repeatability check.** Has anyone sent the same request twice to see if the result stays the same?
 
 ### Step 1: generate the scenario list
@@ -295,12 +315,15 @@ This one isn't a prompt either. Talk it through with your partner, and write you
 Before lunch at 12:45, you should be able to say yes to these.
 
 Automation, Role 1:
+* The agent wrote the tests from a plan you approved, and you wrote none by hand
 * All four core rules have executable tests running against the live API
 * `bugs.md` has every genuine defect, with severity and reproduction steps
 * Your concurrency test really races two requests. It doesn't just run them one after the other
 * Add, modify and delete on a closed retrospective are tested separately
+* No test was made green by loosening an assertion
 
 Automation, Role 2:
+* You approved a plan before the agent changed any file
 * The agent expanded the suite for all five gaps
 * No tautological or shallow assertions are left in the new tests
 * `decisions.md` has your answers about the agent

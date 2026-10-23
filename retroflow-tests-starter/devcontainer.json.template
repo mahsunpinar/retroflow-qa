@@ -1,0 +1,14 @@
+{
+  "name": "RetroFlow API tests (Node 22)",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-playwright.playwright"
+      ]
+    }
+  },
+  "postCreateCommand": "npm install"
+}

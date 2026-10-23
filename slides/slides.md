@@ -38,7 +38,7 @@ We use this deck in five short parts: the kick-off (slides 2 to 5, about 10 minu
 <div class="card">
 <div class="label">BLOCK 2 · BEFORE LUNCH</div>
 <h3>Go deeper</h3>
-<p>Executable tests, an agent that expands them, or exploratory testing by hand</p>
+<p>Executable tests built with an agent, or exploratory testing by hand</p>
 </div>
 <div class="card">
 <div class="label">BLOCK 3 · AFTERNOON</div>
@@ -207,7 +207,7 @@ layout: section
 
 # Going deeper
 
-Executable tests, an agent that expands them, or exploratory testing by hand. And from now on you write the prompts.
+Executable tests built with an agent, or exploratory testing by hand. And from now on you write the prompts.
 
 <!--
 The Block 2 theory takes about 15 minutes. Tell each pair which track and role they have, and why: you looked at who was driving the keyboard this morning. Then say it out loud: from now on they write the prompts. We tell them the goal, they decide the words. Remind them to start a prompt log.
@@ -284,13 +284,13 @@ AI is very good at producing tests that pass, and not always good at producing t
 | **Shallow checks** | Asserts on body content, not just status | Reads the body, not only the status |
 | **No boundaries** | Empty, null, very long, enum edges | The same, in Postman |
 | **No adversarial input** | Malformed JSON, wrong content type, extra fields | The same, in Postman |
-| **No cross-entity checks** | Deleted team, wrong retrospective | The same, by hand |
+| **No cross-entity checks** | Wrong team, wrong retrospective | The same, by hand |
 | **Dependent tests / no repeatability** | Run twice, compare | Send it twice, compare |
 
 <div class="footer">Block 2 · Two ways to hunt for the same kind of bug</div>
 
 <!--
-This slide connects the two tracks, so nobody feels they got the lesser one. The Automation Role 2 pair uses an agent to generate tests for these gaps. The Manual Role 2 pair finds them by hand. The manual tester often finds things a hastily generated suite would miss, because they read the responses. Say that out loud. And the agent can only test the gaps you tell it about, which is why they need to read the plan.
+This slide connects the two tracks, so nobody feels they got the lesser one. The Automation pairs use an agent to generate tests for these gaps. The Manual Role 2 pair finds them by hand. The manual tester often finds things a hastily generated suite would miss, because they read the responses. Say that out loud. And the agent can only test the gaps you tell it about, which is why they need to read the plan.
 -->
 
 ---
@@ -322,7 +322,7 @@ This slide connects the two tracks, so nobody feels they got the lesser one. The
 <div class="footer">Block 2 · An agent reads and edits several files by itself. A chat gives you text. Today's rule for the agent: no hand-written tests.</div>
 
 <!--
-Only the Automation Role 2 pair works with an agent this block, but everyone benefits from the structure, also in a chat: ask for the plan first, then act, then check. The plan is the cheapest place to catch a mistake. Explain why we don't allow hand-written tests today: fixing things through the agent is how you find out where agents go wrong. On a real project you'd obviously fix the small stuff yourself. Tell the pair to open the Source Control panel and keep it open. It lists every file the agent touched, and clicking one shows exactly what changed.
+Both Automation roles work with an agent this block (Role 1 builds the business rule tests with it, Role 2 expands the suite), and the Manual track benefits from the structure, also in a chat: ask for the plan first, then act, then check. The plan is the cheapest place to catch a mistake. Explain why we don't allow hand-written tests today: fixing things through the agent is how you find out where agents go wrong. On a real project you'd obviously fix the small stuff yourself. Tell the pair to open the Source Control panel and keep it open. It lists every file the agent touched, and clicking one shows exactly what changed.
 -->
 
 ---

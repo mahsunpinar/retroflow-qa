@@ -190,7 +190,7 @@ Before the review itself, see what "grounded" AI actually means, since the Autom
 experiencing the same idea through a more technical setup.
 
 If you have a free Claude.ai account with the workshop's connector added (see
-`ai-cheat-sheets/claude-ai-custom-connectors.md` if you haven't set this up), try:
+the setup steps in `block3-own-prompts.md` if you haven't set this up), try:
 
 ```
 Without looking anything up, what does a typical QA standards document usually say about

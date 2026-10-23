@@ -1,0 +1,14 @@
+{
+  "name": "retroflow-tests-starter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Starter project for API tests against a hosted RetroFlow instance",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.0.0",
+    "dotenv": "^16.4.5"
+  }
+}

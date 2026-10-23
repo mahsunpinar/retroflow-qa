@@ -8,7 +8,7 @@ These are examples, not the answer. Whatever you change, keep the habits: the so
 ---
 
 Pairs have rotated. You are now working with someone you haven't paired with today yet. Your
-coach will tell you which track your pair is on: **Automation** (writing and running executable
+coach will tell you which track your pair is on: **Automation** (an agent writes and runs executable
 tests) or **Manual & Exploratory** (testing entirely by hand, no code). If your group has two
 pairs on the same track, one takes Role 1 and the other takes Role 2.
 
@@ -22,8 +22,14 @@ be building on it, and possibly finding more in what it revealed.
 
 ## Role 1 - Executable business-rule tests & bug diagnosis
 
-Your job: turn the core business rules into executable, automated tests that run against the
-live API, and correctly diagnose every failure you get, is it your test, or is it the app?
+Your job: let an agent turn the core business rules into executable, automated tests that run
+against the live API, and correctly diagnose every failure you get, is it your test, or is it the app?
+
+**Both Automation roles work with an agent.** The prompts below are written so you can paste them
+into Agent mode. Add "Don't write or change any file yet, give me a plan first" to Prompt 1, 3
+and 4, and tell the agent in Prompt 2 not to touch the test before it has given a verdict. Watch
+for an agent that "fixes" a failing test by loosening the assertion. Same no-hand-edits rule as
+Role 2: only `prompt-log.md`, `bugs.md`, `decisions.md` and `.env` are edited by hand.
 
 ---
 
@@ -37,7 +43,7 @@ Just read it, and run the app once to see current state.
 ### Prompt 1 - Implement executable business-rule tests
 
 ```
-I have a running Spring Boot REST API for RetroFlow at http://localhost:8080. Here are the
+I have a running Spring Boot REST API for RetroFlow at <your group's URL>. Here are the
 four core business rules I need automated, executable tests for, running against the live
 HTTP API (not unit tests on internal methods):
 
@@ -49,7 +55,7 @@ HTTP API (not unit tests on internal methods):
 
 Here is the API contract: [paste your endpoint list from Block 1]
 
-Write these as RestAssured (or Postman/Newman, your choice) tests that actually call the
+Write these as API tests (in the tool you use: Playwright, Cypress, Postman/Newman...) that actually call the
 running API and assert on the real HTTP response, status code and body.
 ```
 
@@ -159,12 +165,11 @@ read and edit multiple files in a single operation. It is not magic, it operates
 files and the running application you give it access to, makes a plan, and executes changes
 step by step.
 
-> **No IDE installed at all?** Not everyone on this day writes automated tests day to day, so
-> this is expected, not unusual. Open the RetroFlow QA reference repo in a free **GitHub
-> Codespace** instead (Code → Codespaces → Create codespace, on the repo's GitHub page), a
-> full VS Code running in your browser, nothing to install, Java 21 and Maven already set up.
-> Enable **GitHub Copilot Free** (no credit card needed) for agent mode, capped at 50 requests
-> a month, plenty for one block. Everything below works the same once you're in.
+> **No editor with an agent?** The application is hosted, so you only need somewhere to keep
+> your test project, in an editor that has an agent (VS Code with Copilot in Agent mode, for
+> example). Put the folder in a git repository, because that is what makes the Source Control
+> panel work. Still nothing? Ask your coach: a free **GitHub Codespace** with GitHub Copilot
+> Free is the fallback.
 
 Your job: give it a good enough instruction that the test suite it produces is trustworthy,
 not just large. Your constraint: **do not hand-write any test case yourself**. If the agent
@@ -183,8 +188,8 @@ in AI-assisted test generation:
    missing fields, or boundary values for enums
 3. **No adversarial input**, nothing testing malformed JSON, wrong content types, or
    unexpected extra fields
-4. **No cross-entity consistency checks**, nothing verifying that a deleted team's
-   retrospectives behave sensibly, or that a retrospective's feedback items are actually
+4. **No cross-entity consistency checks**, nothing verifying that a retrospective really belongs to the team in the path, or that a
+   retrospective's feedback items are actually
    scoped to the right retrospective
 5. **Test independence**, some tests may depend on execution order or shared state
 
@@ -394,8 +399,8 @@ The same five categories of gap apply whether you're writing code or testing by 
    fields, or edge values for categories like priority
 3. **No adversarial input**, nothing tried with malformed JSON, wrong content types, or
    unexpected extra fields
-4. **No cross-entity consistency checks**, nothing verifying that a deleted team's
-   retrospectives behave sensibly, or that a retrospective's feedback items are actually
+4. **No cross-entity consistency checks**, nothing verifying that a retrospective really belongs to the team in the path, or that a
+   retrospective's feedback items are actually
    scoped to the right retrospective
 5. **No repeatability check**, has anyone actually tried the same request twice to see if the
    result stays consistent?
