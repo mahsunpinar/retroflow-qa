@@ -11,9 +11,9 @@ Final pair rotation. This block goes deeper than anything you've done today. The
 to finish everything, it's to experience what these tools actually feel like and where they
 genuinely change the way you work.
 
-Your coach will tell you which track your pair is on: **Automation** (the MCP server deep
-dive) or **Manual & Exploratory** (the structured release review). If your group has two pairs
-on the same track, work in parallel and compare notes at the showcase.
+You and your pair choose a track together: **Automation** (the MCP server deep dive) or
+**Manual & Exploratory** (the structured release review). Your coach advises. If your group has
+two pairs on the same track, work in parallel and compare notes at the showcase.
 
 ---
 
@@ -391,3 +391,64 @@ genuinely didn't get to, say so explicitly rather than implying full coverage.
 
 - [ ] `bugs.md` reflects every genuine defect found across the whole day
 - [ ] You each have one concrete thing to share at Retro 3
+- [ ] You built a skill and the other pair tested it
+
+---
+
+# Both tracks: the skill
+
+The last 25 minutes of the block. Show only the example for the skill the pair is building, and only when they have tried twice. In the participant file this is the "Both tracks, the last 25 minutes: build a skill" part.
+
+### Draft the skill: stackcraft-test-audit (Automation)
+
+```
+Based on the audit prompts in prompt-log.md that worked best, write a SKILL.md for a skill
+called stackcraft-test-audit. Format: a front matter with name and description, then the
+instructions. Under 40 lines.
+
+The instructions must tell the AI to read the standards through the ai-track-standards MCP
+server (document id stackcraft-qa), to report file and test method for every violation, to
+quote the section of the standards for every violation, to sort by the severity from the
+document, to also look for what is missing (rules without a test), and to never change a test.
+The description must say what the skill does and when to use it.
+```
+
+### Draft the skill: stackcraft-release-review (Manual & Exploratory)
+
+```
+Based on the review prompts in prompt-log.md that worked best, write a SKILL.md for a skill
+called stackcraft-release-review. Format: a front matter with name and description, then the
+instructions. Under 40 lines.
+
+The instructions must tell the AI to read the standards through the ai-track-standards MCP
+server (document id stackcraft-qa), to count a business rule as covered only when a recorded
+response proves it, to ask for the actual request and response before it believes a finding,
+to keep to the scope in the brief, and to write the report with an executive summary, bugs,
+critical, major and minor issues, what is tested and trustworthy, what was NOT verified and a
+release recommendation (BLOCKED / CONDITIONAL / APPROVED) in plain language. The description
+must say what the skill does and when to use it.
+```
+
+### Draft the skill: stackcraft-bug-report (second pair on the same track)
+
+```
+Based on the prompts in prompt-log.md that gave me the best bug reports, write a SKILL.md for
+a skill called stackcraft-bug-report. Format: a front matter with name and description, then
+the instructions. Under 40 lines.
+
+The instructions must tell the AI to read the bug report format and the severity definitions
+through the ai-track-standards MCP server (document id stackcraft-qa), to produce severity,
+exact reproduction steps, actual result (status code and body), expected result and business
+impact for every report, to refuse to write a report without a real response, and to never
+guess at the root cause. The description must say what the skill does and when to use it.
+```
+
+What to look for when you review a pair's skill: does the description say when to use it (that decides whether the AI loads it)? Does it name the server and the document id, so the AI reads the standards instead of remembering them? Is it specific enough for someone else to follow? A skill that says "quote the standard" makes the quote more likely, it does not make it true. In the swap, check that the quote exists.
+
+---
+
+## End of Block 3 checklist (both tracks, the skill)
+
+- [ ] The skill exists, is under 40 lines and has a description that says when to use it
+- [ ] It names the MCP server and the document id as its source of truth
+- [ ] The other pair ran it in a fresh chat on their own material, and gave one piece of feedback

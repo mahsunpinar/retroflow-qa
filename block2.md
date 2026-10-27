@@ -1,9 +1,24 @@
 # Block 2: Writing the prompts yourself
 New pairs! You're now working with someone you haven't paired with yet today.
 
-Your coach will tell you which track your pair is on: **Automation** (an agent writes and runs executable tests for you) or **Manual & Exploratory** (testing by hand, no code). If your group has two pairs on the same track, one pair takes Role 1 and the other takes Role 2.
+## Choose your track (5 minutes, with your pair)
 
-Before you write a single prompt, take 5 minutes to read what your teammates made in Block 1: `test-plan.md`, the test case catalogue, `session-notes.md` and `bugs.md`. We're building on top of that, so don't start from scratch. It will probably also show you a few things you missed this morning.
+From here on there are two ways to work, and **you and your pair choose one, together.** Both are real QA work, and both are judged on the same thing: is your evidence convincing? You choose again in Block 3, so this is not a decision for the whole day.
+
+| | **Automation** | **Manual & Exploratory** |
+|---|---|---|
+| What you do | An agent writes and runs executable tests against the live API. You steer it | You test by hand with Postman or a browser, and use an AI chat to plan, to generate scenarios and to read results |
+| You need | An editor with an agent (or a Codespace), and at least one of you comfortable reading test code | Postman or a browser, and an AI chat. No code, on purpose |
+| Role 1 | Business rule tests and diagnosing failures | A focused exploratory session, including a manual race |
+| Role 2 | Expanding the suite with negative, boundary and adversarial tests | A manual adversarial and boundary checklist |
+| You end with | Executable tests, a bug list, your decisions | Session notes, a bug list, your decisions |
+
+How to decide:
+1. Be honest about your comfort level. Can at least one of you read or write automated tests in Playwright, Cypress or Postman scripts? Then Automation is an option. Neither of you? Take Manual & Exploratory. This day is not about forcing code under time pressure.
+2. Check what the other pair in your group picks. Both pairs on the same track is fine: one pair takes Role 1 and the other takes Role 2.
+3. Tell your coach your track and your role before you start. Your coach advises, and will say so when a choice clearly won't work (Automation with no editor and no way to get one in 10 minutes, for example).
+
+Before you write a single prompt, take 5 minutes to read what your teammates made in Block 1: `test-plan.md`, `test-cases.md`, `session-notes.md` and `bugs.md`. We're building on top of that, so don't start from scratch. It will probably also show you a few things you missed this morning.
 
 **This block, you write the prompts yourself.** This morning you got them ready-made. Now we only tell you the goal, what a good prompt for that goal needs to contain, and what to check afterwards. How you word it is up to you.
 
@@ -12,6 +27,12 @@ Before you write a single prompt, take 5 minutes to read what your teammates mad
 > Stuck after two tries? Ask your coach for the example prompt for that step. Looking is allowed, just write down what the example does that yours didn't.
 
 > **Watch your tokens.** Every message in a long chat gets read again by the AI, and an agent reads your files again on every step. So start a **new chat** for each step, and only paste what that step needs (your session notes, not the whole brief again). Your tool says you're out of requests? Don't wait for it to reset: work on your partner's machine or switch tools, and tell your coach.
+
+**Where things live.** You work in the same group folder as this morning, `retroflow-qa`. Your tests (Automation) go in a `tests/` folder inside it, or in your own test project if you bring one. Notes and bug reports go in the files you already know: `session-notes.md` and `bugs.md`. New this block: `prompt-log.md` and `decisions.md`, next to `bugs.md`.
+
+**How to read this block.** Every step starts with a **Read:** line (the files it works with, these exist already) and a **Create:** line (the file you make or change, and where it lives). The **Goal** is your *done when*: if the Goal is true, you move on. Not sure what to do now? Look at those lines first, then ask your coach.
+
+**Your block at a glance.** This is a rough guide, not a rule. Choosing your track and reading the Block 1 files takes about 10 minutes. The time for each step is under the heading of your role.
 
 ---
 
@@ -41,9 +62,14 @@ Open the **Source Control** panel on the left (or run `git diff` in a terminal).
 
 Your job: let the agent turn the core business rules into automated tests that run against the live API, and work out for every failure whether the app is wrong, or the test is.
 
+About 75 minutes: step 1 takes 20, step 2 takes 15, step 3 takes 20 and step 4 takes 10. The rest is setup and the first request.
+
 Before you start, send one request to the app yourself so you know what the current state is. Don't write any code yet.
 
 ### Step 1: plan, then write the tests
+
+* **Read:** `retroflow-qa-brief.md`, `retroflow-api-reference.md` and your `test-cases.md` from Block 1
+* **Create:** the test files in `tests/` (new). Paste the plan in `prompt-log.md`
 
 **Goal:** executable tests for the four core business rules, running against the live API, which is your group's URL. Not unit tests on internal methods, real HTTP calls. First a plan, then the tests.
 
@@ -70,6 +96,9 @@ Then check it:
 
 ### Step 2: diagnose the failures
 
+* **Read:** the failing tests, their actual responses and the brief
+* **Create:** nothing in the tests yet, only verdicts. Genuine bugs go in `bugs.md`, what you learned goes in `decisions.md`
+
 Some of your tests from step 1 will fail. Take them one at a time.
 
 **Goal:** for every failing test, a verdict: a bug in the application, a bug in your test, or a rule that isn't clear enough and needs someone to decide.
@@ -87,6 +116,9 @@ Then check it:
 * Every test that was wrong: tell the agent to fix it, and write a line in `decisions.md` about what you learned about reading the API contract.
 
 ### Step 3: edge cases and concurrency
+
+* **Read:** the brief and `retroflow-api-reference.md`
+* **Create:** one new test per case in `tests/`. Anything you find goes in `bugs.md`
 
 **Goal:** an executable test, against the live API, for each of these:
 1. Two requests to create a retrospective for the same team, fired at the same moment. Is "one OPEN at a time" still enforced?
@@ -108,6 +140,9 @@ Then check it:
 
 ### Step 4: one operation at a time
 
+* **Read:** your tests from step 1 and the closed retrospective rule in the brief
+* **Create:** three new tests in `tests/`, one per operation. Gaps go in `bugs.md`
+
 **Goal:** three separate tests for the closed retrospective rule: add a feedback item, modify one and delete one, each on a CLOSED retrospective. You get a pass or fail for each of them, not one answer for all three.
 
 A good prompt for this:
@@ -126,6 +161,8 @@ Then check it:
 
 Your job: use the agent to add negative, boundary and adversarial tests across the whole API, in one coordinated operation. Everything goes through the agent, you don't write test cases by hand.
 
+About 75 minutes: step 1 takes 10, step 2 takes 20, step 3 takes 20 and step 4 takes 10. The rest is setup.
+
 > Start from the tests the Role 1 pair built. Your group has no Role 1 pair? Then your first prompt asks the agent to create a small baseline suite for the four core rules (your Block 1 test case catalogue is good input), in the tool you know.
 
 The test suite so far has the gaps that are common in AI-assisted testing:
@@ -136,6 +173,9 @@ The test suite so far has the gaps that are common in AI-assisted testing:
 5. **Tests that depend on each other.** Some tests may only pass in a certain order, or share state
 
 ### Step 1: plan before you act
+
+* **Read:** the tests in `tests/` (from the Role 1 pair, or none yet) and `test-cases.md`
+* **Create:** nothing in the code. Paste the plan in `prompt-log.md`, you need it in step 2
 
 Never let an agent start changing files before you've seen its plan. That's the habit of this block.
 
@@ -154,6 +194,9 @@ Then check it:
 
 ### Step 2: let it execute
 
+* **Read:** your plan and the existing tests
+* **Create:** new tests in `tests/`. The existing passing tests stay as they are
+
 **Goal:** new tests for all five gaps, written by the agent, with you in control.
 
 A good prompt for this:
@@ -168,6 +211,9 @@ Then check it:
 * Keep a running note of everything the agent did that surprised you, good or bad.
 
 ### Step 3: verify what it built
+
+* **Read:** the new tests in `tests/`
+* **Create:** the list of issues in `prompt-log.md`, then the fixes in `tests/`
 
 **Goal:** a list of everything that's wrong with the new tests, and then those things fixed. Two prompts, in this order.
 
@@ -186,6 +232,10 @@ Then check it:
 
 ### Step 4: reflect
 
+* **Read:** your `prompt-log.md` and the diff of what the agent changed
+* **Create:** your answers in `decisions.md`
+* **Done when:** all four questions are answered, in your own words
+
 This one isn't a prompt, it's a conversation with your partner. Talk it through, and write your answers in `decisions.md`:
 1. What did the agent generate that surprised you?
 2. At what point, if any, did you stop trusting what it produced?
@@ -200,7 +250,12 @@ This one isn't a prompt, it's a conversation with your partner. Talk it through,
 
 Your job: go further and harder at the app than you did in Block 1, and aim at the business rules that carry the most risk. You only need Postman (or a browser) and your AI chat. No code, on purpose.
 
+About 75 minutes: step 1 takes 10, step 2 takes 15, step 3 takes 30 and step 4 takes 10. The rest is setup.
+
 ### Step 1: plan a focused session
+
+* **Read:** `test-plan.md`, `session-notes.md` and `bugs.md`
+* **Create:** the session plan, as a new section "Block 2 session" in `session-notes.md`
 
 **Goal:** a plan for a 30-minute exploratory session, aimed at the rules you've tested the least so far.
 
@@ -214,6 +269,9 @@ Then check it:
 * Does this really point at gaps, or does it repeat what you did in Block 1? If it's too similar, push back and ask for something sharper.
 
 ### Step 2: race the concurrency rule by hand
+
+* **Read:** the "only one OPEN retrospective at a time" rule in the brief
+* **Create:** the procedure, and a line for every attempt, in `session-notes.md`
 
 This is the hardest rule to test by hand, so it's worth doing properly.
 
@@ -231,6 +289,10 @@ Then actually do it with your partner:
 
 ### Step 3: run the session
 
+* **Read:** the list from step 1 and the procedure from step 2
+* **Create:** your notes in `session-notes.md`
+* **Done when:** the 30 minutes are up and every note has the four lines below
+
 This one isn't a prompt. Set a timer for 30 minutes and work through the list from step 1, plus the race from step 2. Keep your notes in `session-notes.md`, in the same format as this morning:
 
 ```
@@ -244,6 +306,9 @@ Worth a closer look? Y/N
 * Found something that looks like a real bug? Reproduce it a second time before you move on. A bug you can't reproduce twice is weak evidence.
 
 ### Step 4: write up what you found
+
+* **Read:** `session-notes.md`
+* **Create:** one report per genuine issue, added to the shared `bugs.md`
 
 **Goal:** a clear bug report for every genuine issue in your notes, in the format your team uses in `bugs.md`.
 
@@ -262,6 +327,8 @@ Then check it:
 
 Your job: the manual version of what the Automation track's agent is doing in code. You hunt for the same kinds of gaps, but you do it by hand.
 
+About 75 minutes: step 1 takes 10, step 2 takes 30, step 3 takes 15 and step 4 takes 10. The rest is setup.
+
 The agent in the other track generates tests. You're going to generate the same kind of thinking, a systematic list of adversarial and boundary scenarios, and then run it yourself against the app. These are the five kinds of gaps to go after:
 1. **Shallow checks.** Only glancing at the status code, not at what's in the body
 2. **No boundary tests.** Nothing tried with empty strings, very long strings, missing fields or edge values like priority
@@ -270,6 +337,9 @@ The agent in the other track generates tests. You're going to generate the same 
 5. **No repeatability check.** Has anyone sent the same request twice to see if the result stays the same?
 
 ### Step 1: generate the scenario list
+
+* **Read:** the brief, `retroflow-api-reference.md` and `bugs.md`
+* **Create:** `scenarios.md` in the working folder (new file), with the checklist
 
 **Goal:** a checklist of scenarios you can run by hand in Postman. For each scenario: the exact request, and what a correct response looks like.
 
@@ -283,12 +353,19 @@ Then check it:
 
 ### Step 2: run the checklist
 
+* **Read:** `scenarios.md`
+* **Create:** every result in `session-notes.md`, also the ones that behave correctly
+* **Done when:** every scenario on the list has a result next to it
+
 This one isn't a prompt. Work through the checklist in Postman, one scenario at a time, and write down every result in `session-notes.md`. Also the ones that behave correctly.
 
 * Don't skip a scenario because you expect it to pass. Several real bugs in this app only show up on the boring cases.
 * Something looks wrong? Try to explain in plain language why, before you ask the AI. Then ask the AI to help you read the response, and compare its explanation with yours.
 
 ### Step 3: interrogate the results
+
+* **Read:** `session-notes.md`
+* **Create:** a verdict per result in `session-notes.md`. Genuine defects go in `bugs.md`
 
 **Goal:** for every result you marked "worth a closer look": is it a defect, expected behaviour that just looked odd, or something you can't judge without more information? Plus an honest answer to the question: which of the five kinds of gaps did I clearly not try enough?
 
@@ -303,6 +380,10 @@ Then check it:
 
 ### Step 4: reflect
 
+* **Read:** your `session-notes.md` and `prompt-log.md`
+* **Create:** your answers in `decisions.md`
+* **Done when:** all three questions are answered, in your own words
+
 This one isn't a prompt either. Talk it through with your partner, and write your answers in `decisions.md`:
 1. What did you find by hand that a quickly generated automated test would have missed, and why?
 2. At what point, if any, did you stop trusting your own first read of a response and dig deeper?
@@ -312,7 +393,7 @@ This one isn't a prompt either. Talk it through with your partner, and write you
 
 ## Done?
 
-Before lunch at 12:45, you should be able to say yes to these.
+Before lunch at 12:45, you should be able to say yes to these. This is also what we look at in Retro 2. Your coach asks one pair to show their result on the shared screen, so be ready to open the diff, the notes or the bug list.
 
 Automation, Role 1:
 * The agent wrote the tests from a plan you approved, and you wrote none by hand

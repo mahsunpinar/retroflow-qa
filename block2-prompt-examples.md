@@ -7,10 +7,10 @@ These are examples, not the answer. Whatever you change, keep the habits: the so
 
 ---
 
-Pairs have rotated. You are now working with someone you haven't paired with today yet. Your
-coach will tell you which track your pair is on: **Automation** (an agent writes and runs executable
-tests) or **Manual & Exploratory** (testing entirely by hand, no code). If your group has two
-pairs on the same track, one takes Role 1 and the other takes Role 2.
+Pairs have rotated. You are now working with someone you haven't paired with today yet. You
+and your pair choose a track together: **Automation** (an agent writes and runs executable
+tests) or **Manual & Exploratory** (testing entirely by hand, no code). Your coach advises. If
+your group has two pairs on the same track, one takes Role 1 and the other takes Role 2.
 
 Before you write a single prompt: spend 5 minutes reading what your teammates produced in
 Block 1, `test-plan.md`, the test case catalogue, `session-notes.md`, and `bugs.md`. You will

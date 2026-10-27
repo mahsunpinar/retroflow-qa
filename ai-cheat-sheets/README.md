@@ -20,6 +20,8 @@ tried.
   actually is and why it matters.
 - [`ai-for-manual-testing.md`](ai-for-manual-testing.md): using AI chat tools for exploratory
   testing and manual test work, no automation required.
+- [`working-efficiently.md`](working-efficiently.md): instructions files, prompt files and
+  skills, so you don't retype the same rules in every chat. Used in Block 3.
 
 If something breaks and these guides don't cover it, see `../../ai-tooling-fallback.md` or ask
 your coach.

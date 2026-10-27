@@ -20,7 +20,7 @@ mdc: true
 A bit of theory for every block of today. Short, so you can get back to work.
 
 <!--
-We use this deck in five short parts: the kick-off (slides 2 to 5, about 10 minutes), 15 minutes at the start of Block 1, 2 and 3, and the last four slides during the wrap-up. There's no theory in Block 4, it has to stay a surprise. Keep every part short. People learn during the exercises, the theory only gives them the words for what they're about to run into. If you run over, it comes out of the exercise time, so cut a slide instead.
+We use this deck in five short parts: the kick-off (slides 2 to 7, about 17 minutes: the scenario and how the day works take 7, the theory 10), 15 minutes at the start of Block 1, 2 and 3, and the last four slides during the wrap-up. There's no theory in Block 4, it has to stay a surprise. Keep every part short. People learn during the exercises, the theory only gives them the words for what they're about to run into. If you run over, it comes out of the exercise time, so cut a slide instead.
 -->
 
 ---
@@ -38,19 +38,80 @@ We use this deck in five short parts: the kick-off (slides 2 to 5, about 10 minu
 <div class="card">
 <div class="label">BLOCK 2 · BEFORE LUNCH</div>
 <h3>Go deeper</h3>
-<p>Executable tests built with an agent, or exploratory testing by hand</p>
+<p>Executable tests built with an agent, or exploratory testing by hand. You choose</p>
 </div>
 <div class="card">
 <div class="label">BLOCK 3 · AFTERNOON</div>
 <h3>Grounding</h3>
-<p>AI that reads StackCraft's real QA standards, and a review you can defend</p>
+<p>AI that reads StackCraft's real QA standards, a review you can defend, and a skill you can reuse</p>
 </div>
 </div>
 
 <div class="footer">Kick-off · Automated or manual: both count today, and both are judged on the same thing. Is your evidence convincing?</div>
 
 <!--
-Explain the shape of the day in about a minute. Not everybody here writes automated tests every day, and that's fine. Block 1 is the same for everyone and needs no code. From Block 2 on, pairs go on the Automation track or the Manual and Exploratory track, and you will tell them which one at the start of the block. Say that the pairs rotate and that you announce each new pairing at the start of the block. Don't say anything about the end of the day.
+Explain the shape of the day in about a minute. Not everybody here writes automated tests every day, and that's fine. Block 1 is the same for everyone and needs no code. From Block 2 on, each pair chooses the Automation track or the Manual and Exploratory track at the start of the block, and you advise. Also mention the thread through the day: what they make in Block 1 feeds Block 2, and in Block 3 they turn what worked into a skill. Say that the pairs rotate and that you announce each new pairing at the start of the block. Don't say anything about the end of the day.
+-->
+
+---
+
+<div class="eyebrow">The scenario</div>
+
+# A dev cohort hands you RetroFlow. Nobody has tested it
+
+<div class="grid grid-cols-3 gap-5 mt-6">
+<div class="card">
+<div class="label">THE CLIENT</div>
+<h3>StackCraft</h3>
+<p>A software consultancy with 12 agile teams. Retrospectives run on sticky notes, Miro boards and Google Docs. Nobody knows what was decided, or if the action items ever got done.</p>
+</div>
+<div class="card accent">
+<div class="label">THE PRODUCT</div>
+<h3>RetroFlow</h3>
+<p>A backend REST API that stores teams, retrospectives, feedback items and action items, with business rules around them.</p>
+</div>
+<div class="card grey">
+<div class="label">WHAT YOU INHERIT</div>
+<h3>An app that demos fine</h3>
+<p>It compiles and the happy path works. A green test suite that was written in a hurry. And a CTO who wants to know if it can go in front of 12 teams on Monday.</p>
+</div>
+</div>
+
+<div class="footer">Kick-off</div>
+
+<!--
+Take about 3 minutes for this slide. Tell it as a story, not as a list. StackCraft is fictional, but the situation is real: a team hands you something that works in a demo, and you have to say if it is safe to ship. Explain what RetroFlow is meant to do in one sentence. Do not walk through the brief, that is the first exercise of the morning and they read it themselves. Do not mention the seeded bugs. The question for the day is the CTO's: can this go in front of 12 teams on Monday, and how do you know?
+-->
+
+---
+
+<div class="eyebrow">How today works</div>
+
+# Little guidance, on purpose
+
+<div class="grid grid-cols-2 gap-5 mt-6">
+<div class="card">
+<h3>You get the goal, you find the way</h3>
+<p>Your tool, your prompts, your order of work. You will get stuck at some point. That is part of it.</p>
+</div>
+<div class="card">
+<h3>Every step has the same three lines</h3>
+<p><b>Read:</b> files that already exist. <b>Create:</b> the file you make, and where. <b>Done when:</b> what has to be true. Lost? Start there.</p>
+</div>
+<div class="card">
+<h3>Stuck after two tries?</h3>
+<p>Ask your coach for the example prompt for that one step. Looking is allowed.</p>
+</div>
+<div class="card">
+<h3>You choose your track</h3>
+<p>From Block 2: Automation or Manual &amp; Exploratory. Your pair decides, your coach advises. Both count.</p>
+</div>
+</div>
+
+<div class="footer">Kick-off · Unclear what to do next? Then the exercise isn't clear enough, say so</div>
+
+<!--
+Take about 2 minutes. This is expectation-setting, and it matters. Say out loud that you give little guidance on purpose, because working things out is where the learning is, and that it works for most people but not for everybody. Keep the freedom in the how and be strict about the what: that is why every step starts with Read, Create and Done when. Tell them they can say when something is unclear, it helps you improve the day. Block 1 is the same for everyone. From Block 2 they choose a track together with their pair, and the exercise file explains how to decide. Mention the cheat sheets in ai-cheat-sheets for the tools they are less familiar with.
 -->
 
 ---
@@ -210,7 +271,34 @@ layout: section
 Executable tests built with an agent, or exploratory testing by hand. And from now on you write the prompts.
 
 <!--
-The Block 2 theory takes about 15 minutes. Tell each pair which track and role they have, and why: you looked at who was driving the keyboard this morning. Then say it out loud: from now on they write the prompts. We tell them the goal, they decide the words. Remind them to start a prompt log.
+The Block 2 theory takes about 15 minutes. Each pair chooses its track and role, and the next slide helps them decide. Then say it out loud: from now on they write the prompts. We tell them the goal, they decide the words. Remind them to start a prompt log.
+-->
+
+---
+
+<div class="eyebrow">Going deeper</div>
+
+# Automation or Manual & Exploratory: you choose
+
+<div class="grid grid-cols-2 gap-5 mt-5">
+<div class="card accent">
+<div class="label">AUTOMATION</div>
+<h3>An agent writes and runs the tests</h3>
+<p>You steer it: plan, act, check. You need an editor with an agent (or a Codespace) and someone who can read test code.</p>
+</div>
+<div class="card">
+<div class="label">MANUAL &amp; EXPLORATORY</div>
+<h3>You test by hand, AI is your thinking partner</h3>
+<p>Postman or a browser, and an AI chat. No code, on purpose.</p>
+</div>
+</div>
+
+<p class="mt-5">Neither of you comfortable with test code? Take Manual &amp; Exploratory. Both tracks are judged on the same thing: is your evidence convincing?</p>
+
+<div class="footer">Block 2 · Decide with your pair and tell your coach. In Block 3 you choose again</div>
+
+<!--
+Take about 2 minutes. The choice is theirs, with their pair. Your job is to advise: if at least one of them is comfortable reading test code, Automation is an option. If neither is, point them to Manual and Exploratory, and say clearly that this is not the lesser track. Nobody should be pushed into code under time pressure. If both pairs of a group pick the same track, they split Role 1 and Role 2. Say that they choose again in Block 3, so someone who did Manual now can try Automation and the other way around. Step in only if a choice clearly won't work, for example Automation with no editor and no way to get one.
 -->
 
 ---
@@ -331,12 +419,12 @@ layout: section
 
 <div class="eyebrow">Block 3 · 13:45</div>
 
-# Grounding & reviewing
+# Grounding, reviewing & skills
 
-We connect AI to StackCraft's real QA standards, and we review RetroFlow with it.
+We connect AI to StackCraft's real QA standards, review RetroFlow with it, and turn what works into a skill.
 
 <!--
-The Block 3 theory takes about 15 minutes. Both tracks do step 1 with the connector. The Automation pair keeps using it for the audit, the Manual pair uses the Claude.ai connector for the first step and then moves on to the release review. The setup is at the top of their file, there is nothing to install. Say it again: they write the prompts, with even fewer hints than this morning.
+The Block 3 theory takes about 15 minutes. Pairs choose their track again. Both tracks do step 1 with the connector. The Automation pair keeps using it for the audit, the Manual pair uses the Claude.ai connector for the first step and then moves on to the release review. In the last 25 minutes both build a skill and the other pair tests it. The setup is at the top of their file, there is nothing to install. Say it again: they write the prompts, with even fewer hints than this morning.
 -->
 
 ---
@@ -435,6 +523,55 @@ This is the most important review of the Manual track, and it applies to the Aut
 -->
 
 ---
+
+<div class="eyebrow">Working efficiently</div>
+
+# And what's a skill?
+
+<div class="grid grid-cols-2 gap-8 mt-5">
+<div class="code-box">
+<div class="file">stackcraft-test-audit/SKILL.md</div>
+&#45;&#45;&#45;<br>
+name: stackcraft-test-audit<br>
+description: Audits a test suite against StackCraft's QA standards. Use when asked to review or check tests.<br>
+&#45;&#45;&#45;<br>
+1. Read the standards through the MCP server...<br>
+2. ...
+</div>
+<div>
+<p>The AI always sees the <b>name and description</b> of every skill. Only when your request matches does it read the full instructions.</p>
+<p class="mt-3">That's why the <b>description</b> matters so much: it decides whether your skill gets used.</p>
+<p class="mt-3 text-sm">Claude.ai: zip the folder, upload under Customize → Skills.<br>GitHub Copilot: <code>.github/skills/&lt;name&gt;/SKILL.md</code></p>
+</div>
+</div>
+
+<div class="footer">Block 3 · Last 25 minutes: each pair builds one skill, then the other pair tests it</div>
+
+<!--
+A skill packages a task the way your team wants it done. The key idea is that it is only loaded when it is needed, so you can have dozens of them. The three skills today: stackcraft-test-audit for the Automation pair, stackcraft-release-review for the Manual pair, and stackcraft-bug-report when both pairs of a group are on the same track. Claude.ai needs Code execution and file creation switched on for skills (it is in their setup steps). The real lesson is the swap: if the other pair's AI doesn't pick up your skill, or answers from memory and not from the standards document, your description or your source of truth is not good enough yet.
+-->
+
+---
+
+<div class="eyebrow">Working efficiently</div>
+
+# Instructions, prompt or skill: which one do I use?
+
+| Use | When | Example |
+|-----|------|---------|
+| **Instructions** | Rules for everything on this engagement | "Never loosen an assertion to make a test pass" |
+| **Saved prompt** | A task you start yourself, the same way each time | "Interrogate the output" from Block 1 |
+| **Skill** | A task the AI should recognise and do your way | stackcraft-test-audit, stackcraft-release-review |
+
+None of these make the AI correct. They do make it more consistent, which makes checking a lot easier.
+
+<div class="footer">Block 3 · Cheat sheet: ai-cheat-sheets/working-efficiently.md</div>
+
+<!--
+Go through this one quickly, it's the overview they'll use after today. An instructions file is a file the AI reads before every request in a project, like .github/copilot-instructions.md or CLAUDE.md. We did not build one today, but they will want one on a real engagement, and the cheat sheet explains how. The warning at the bottom is important: a skill that says "quote the standard" makes it more likely that the AI quotes the standard, it doesn't guarantee it. After this slide, send them to the setup at the top of their Block 3 file.
+-->
+
+---
 layout: section
 ---
 
@@ -461,7 +598,7 @@ There's no theory in Block 4, so these four slides are for the wrap-up at 16:45,
 <div class="card"><h3>Check what it added</h3><p>New tests, new dependencies, new "facts". Does each one exist?</p></div>
 </div>
 
-<div class="footer">Wrap-up · Your prompt log is the start of your team's prompt library</div>
+<div class="footer">Wrap-up · Your prompt log is the start of your team's prompt library · Cheat sheet: ai-cheat-sheets/working-efficiently.md</div>
 
 <!--
 The first four are the practical habits. The last box ties back to Block 4 and the prompt logs: start a library from the prompts that actually found real bugs today, not from the prompts you think you'll need. The fifth habit, check what it adds, is a good place to refer back to the last block of the day.
@@ -497,7 +634,7 @@ class: statement
 
 # Try one thing on Monday
 
-Take your prompt log with you. Pick one thing from today and do it differently on your project this week. Come back with a result.
+Take your prompt log and your skill with you. Pick one thing from today and do it differently on your project this week. Come back with a result.
 
 <!--
 End the day here. This is the third message from the facilitator guide: ask every group to name their one thing out loud before they leave.

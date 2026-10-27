@@ -1,0 +1,16 @@
+# macOS / Windows system files
+.DS_Store
+**/.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor / IDE local settings
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Local runtime or temp files
+*.tmp
+*.log

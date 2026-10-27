@@ -7,9 +7,9 @@ habits that will make the rest of the day faster and safer.
 
 **Nobody writes or edits code in this block, on purpose.** Whether you automate tests day to
 day or work entirely manually, everything below uses Postman (or a browser) and your AI chat
-tool. From Block 2 onward, your coach will route pairs toward an Automation track or a
-Manual & Exploratory track based on what actually shows up in the room today, but Block 1 is
-the same for everyone, so there's no wrong group to be in right now.
+tool. From Block 2 onward, you and your pair choose between an Automation track and a
+Manual & Exploratory track (the start of Block 2 explains how, and your coach helps). Block 1
+is the same for everyone, so there is nothing to choose yet.
 
 After each prompt: read the output critically before using it. If something feels off, it
 probably is.
@@ -23,6 +23,47 @@ your group's URL instead. The endpoints are listed in `retroflow-api-reference.m
 > Give every team you create a name that contains your own initials, and you'll always know
 > which data is yours.
 
+**Which tool?** The exercises are written for an AI chat tool and Postman (or a browser). Use
+GitHub Copilot Chat or Claude.ai, whichever works on your laptop right now. Want to use
+something else? Go ahead, as long as AI does the work. The cheat sheets in `ai-cheat-sheets/`
+show you how the main tools work.
+
+**Where things live.** The course files (the QA brief, the API reference, the inherited test
+suite, these exercises and the cheat sheets) are shared by your coach. Everything you create
+today goes in one working folder for your group, called `retroflow-qa`. You rotate partners
+every block, and Block 2 builds on what you made in Block 1, so the folder has to be shared.
+Agree in your group how you do that. A git repository is the easiest, because the Automation
+track needs one later anyway. A shared drive folder works too. "The root of the working
+folder" in these exercises always means the root of `retroflow-qa`.
+
+**How to read an exercise.** Every prompt below starts with the same three lines, so you
+always know where you stand:
+
+* **Read:** the files the prompt works with. These already exist, you don't make them.
+* **Create:** the file you make or change, and where it lives. If it says *nothing*, no file
+  changes in this step.
+* **Done when:** what has to be true before you move on to the next prompt.
+
+Not sure what to do now? Look at these lines first. Still not sure after that? Ask your
+coach. It means the exercise isn't clear enough, not that you're doing it wrong.
+
+**The files of the day.** Over the day your working folder collects a few files that you make
+yourselves. You'll meet them in this order:
+
+| File | Made by | In | What it is for |
+|---|---|---|---|
+| `test-plan.md` | Pair AB | Block 1 | Your risk priorities and your test plan |
+| `test-cases.md` | Pair AB | Block 1 | The test case catalogue, with the real results next to it |
+| `charter.md` | Pair CD | Block 1 | The charter for your exploratory session |
+| `session-notes.md` | Pair CD | Block 1 | What you tried, what you expected, what happened |
+| `bugs.md` | Both pairs | Block 1 | One shared list of every genuine defect |
+| `prompt-log.md` | Every pair | Block 2 | Your prompts, with a one-line verdict each |
+| `decisions.md` | Every pair | Block 2 | What you decided and what you learned |
+| `pre-release-quality-report.md` | Manual track | Block 3 | The report with a release recommendation |
+| the skill folder, with `SKILL.md` | Every pair | Block 3 | The skill you build and swap |
+
+Anything that is not in this table already exists in the course files.
+
 ---
 
 ## Pair AB - Risk-based test plan & test case catalogue
@@ -32,6 +73,10 @@ You are building the test strategy for RetroFlow: what to test, in what order, a
 ---
 
 ### Prompt 1 - Understand before you test
+
+* **Read:** the RetroFlow QA brief (`retroflow-qa-brief.md`)
+* **Create:** `test-plan.md` in the root of the working folder (new file)
+* **Done when:** you and your partner agreed on a risk priority order, and wrote it down
 
 Open your AI chat tool. Paste the full contents of the RetroFlow QA brief and send this prompt:
 
@@ -59,6 +104,11 @@ be a bug."
 
 ### Prompt 2 - Risk-based test plan
 
+* **Read:** the brief and your `test-plan.md`
+* **Create:** the plan itself, added to `test-plan.md`
+* **Done when:** the plan matches your own judgement and not just the AI's, and concurrency
+  has a clear place in the priority order
+
 ```
 Based on this domain brief, propose a risk-based test plan for RetroFlow covering:
 - Test levels to use (API-level, integration, exploratory) and why
@@ -79,6 +129,11 @@ Explain your reasoning for the priority order, not just the ranking itself.
 ---
 
 ### Prompt 3 - Test case catalogue for core flows
+
+* **Read:** the brief, `test-plan.md` and `retroflow-api-reference.md`
+* **Create:** `test-cases.md` in the root of the working folder (new file)
+* **Done when:** the catalogue covers all four core rules, with three separate cases for the
+  closed-retrospective rule
 
 ```
 Write a structured test case catalogue for the following RetroFlow flows. For each test case,
@@ -104,6 +159,11 @@ Include both positive and negative cases for each flow.
 
 ### Prompt 4 - Manually exercise the API
 
+* **Read:** `test-cases.md`, `retroflow-api-reference.md` and your group's URL
+* **Create:** the real results in `test-cases.md`, and the first entries in `bugs.md` (new file)
+* **Done when:** at least 3 test cases ran against the live app, with the real status code and
+  body written down
+
 No test code today, just Postman's UI (or a browser, or curl if you're comfortable with it)
 and your own hands.
 
@@ -126,6 +186,11 @@ Present it as a simple table: test case ID, request, and what response you'd exp
 ---
 
 ### Prompt 5 - Interrogate the output
+
+* **Read:** `test-cases.md` with your results, and the brief
+* **Create:** the missing test cases, added to `test-cases.md`
+* **Done when:** for every one of the four rules you know if it has coverage, and what that
+  test would not catch
 
 This is the most important prompt of the block. Do not skip it.
 
@@ -162,6 +227,11 @@ survive scrutiny.
 
 ### Prompt 1 - Build an exploratory testing charter
 
+* **Read:** the RetroFlow QA brief (`retroflow-qa-brief.md`)
+* **Create:** `charter.md` in the root of the working folder (new file)
+* **Done when:** the charter points at the highest-risk areas, including the parts of the
+  brief that are underspecified
+
 ```
 I'm a test engineer preparing an exploratory testing session for RetroFlow, a Spring Boot
 backend for running team retrospectives. Here is the handover brief:
@@ -185,6 +255,11 @@ Keep it as a focused, time-boxed session plan, not an exhaustive checklist.
 ---
 
 ### Prompt 2 - Run the session
+
+* **Read:** `charter.md`, `retroflow-api-reference.md` and your group's URL
+* **Create:** `session-notes.md` in the root of the working folder (new file)
+* **Done when:** you tested for at least 25 minutes, with real notes in the format below,
+  including the race attempt and the three separate operations on a closed retrospective
 
 Set a timer for 25 minutes. Using Postman (point-and-click, no scripting) or a browser, work
 through your charter against the running application. Keep running notes as you go, in a file
@@ -211,6 +286,11 @@ Worth a closer look? Y/N
 
 ### Prompt 3 - Get a plain-language read on the inherited test suite
 
+* **Read:** `RetroflowApiTest.java` (to read, not to run) and your `session-notes.md`
+* **Create:** a short section "Inherited test suite" at the bottom of `session-notes.md`
+* **Done when:** you can say in plain language which tests would catch a real regression and
+  which would pass whatever the API returned
+
 You do not need to read Java to do this. Let AI translate it for you, then you make the call.
 
 ```
@@ -235,6 +315,11 @@ return specific data.
 
 ### Prompt 4 - Write up what you found
 
+* **Read:** `session-notes.md`
+* **Create:** the reports, in `bugs.md`. Pair AB started that file, so add to theirs
+* **Done when:** every genuine issue has a report with severity, steps to reproduce, expected
+  result, actual result and business impact, in one shared list
+
 ```
 Here are my raw session notes from exploratory testing: [paste session-notes.md]. Write these
 up as clear bug reports, one per genuine issue, with a title, severity (Critical / High /
@@ -250,6 +335,11 @@ factual, don't guess at the root cause, and don't invent an issue that isn't in 
 ---
 
 ### Prompt 5 - Interrogate the output
+
+* **Read:** the brief, `session-notes.md` and `bugs.md`
+* **Create:** nothing new. Extra findings go into `session-notes.md` and `bugs.md`
+* **Done when:** you know which of the four rules you haven't tried to break yet, and you
+  tried at least one of them
 
 This is the most important prompt of the block. Do not skip it.
 
@@ -273,18 +363,19 @@ Business rules to check against:
 
 ## End of Block 1 checklist
 
-Before Retro 1, your team should be able to answer yes to:
+This is also what we look at in Retro 1. Your coach asks one pair to show their result on the
+shared screen. Before Retro 1, your team should be able to answer yes to:
 
 **Pair AB:**
 - [ ] `test-plan.md` exists with an agreed risk priority order
-- [ ] A test case catalogue exists covering all four core business rules, including all three
+- [ ] `test-cases.md` exists, with a test case catalogue covering all four core business rules, including all three
       operations of the closed-retrospective rule
 - [ ] At least 3 test cases have actually been run against the live app, with real results
       recorded
 - [ ] You've run Prompt 5 and know which business rules currently have zero coverage
 
 **Pair CD:**
-- [ ] A testing charter exists and was actually followed, not just written and ignored
+- [ ] `charter.md` exists and was actually followed, not just written and ignored
 - [ ] `session-notes.md` exists with real findings from at least 25 minutes of hands-on testing
 - [ ] The inherited test suite's weak assertions and gaps are documented in plain language
 - [ ] You've run Prompt 5 and know which business rules you haven't tried to break yet
